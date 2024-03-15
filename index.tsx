@@ -7,10 +7,15 @@ const server = Bun.serve({
   fetch: handler,
 });
 
+type Todo = { id: number; text: string };
+const todos: Todo[] = [];
+
+type TodoRequestBody = { todo: string };
+
 console.log(`Listening on http://${server.hostname}:${server.port}`);
 console.log(`Press Ctrl+C to stop the server`);
 
-function handler(request: Request): Response {
+async function handler(request: Request): Promise<Response> {
   const url = new URL(request.url);
 
   // to do: make elysia server
@@ -21,7 +26,17 @@ function handler(request: Request): Response {
 
   // accept the submission from form
   if (url.pathname === "/todos" && request.method === "POST") {
-    return new Response(renderToString(<TodoList todos={[]} />));
+    // the to do will be in the request body
+    const { todo } = (await request.json()) as TodoRequestBody;
+
+    if (!todo?.length) return new Response("Invalid Input", { status: 500 });
+
+    todos.push({
+      id: todos.length + 1,
+      text: todo,
+    });
+
+    return new Response(renderToString(<TodoList todos={todos} />));
   }
 
   // accept the get todo items from form
@@ -32,11 +47,11 @@ function handler(request: Request): Response {
   return new Response("Not Found", { status: 404 });
 }
 
-function TodoList(props: { todos: { id: number; text: string }[] }) {
+function TodoList(props: { todos: Todo[] }) {
   return (
     <ul>
       {props.todos.length
-        ? props.todos.map((todo) => <li> {todo.text}</li>)
+        ? props.todos.map((todo) => <li key={todo.id}> {todo.text}</li>)
         : "No Items Added"}
     </ul>
   );
