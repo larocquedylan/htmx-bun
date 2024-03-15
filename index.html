@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./lib/htmx.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://unpkg.hyperscript.org@0.9.11"></script>
+    <script src="https://unpkg.com/htmx.org/dis/ext/json-enc.js"></script>
+    <title>Bun x HTMX</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100 w-full h-screen flex flex-col items-center">
+    <div class="w-1/2 h-1/2 bg-white rounded-lg shadow-lg p-4">
+      <h1 class="text-2xl font-bold">Bun x HTMX</h1>
+    </div>
+    <main
+      class="container mx-auto w-full max-w-xl p-5 bg-white shadow-md rounded-md">
+      <form class="mb-4" hx-post="/todo" hx-target="#todo" hx-ext="json-enc">
+        <label
+          for="todo"
+          class="block text-sm font-semibold text-gray-600 mb-1">
+          Create new item
+        </label>
+        <input
+          id="todo"
+          name="todo"
+          type="text"
+          class="w-full p-2 border border-gray-300 rounded-md focus:outline-non foxus:border-blue-500"
+          aria-label="create bun item"
+          placeholder="What needs to be done?" />
+        <button
+          type="submit"
+          class="w-full p-2 bg-blue-500 text-white rounded-md mt-2 hover:bg-blue-600 focus:outline-none">
+          Add
+        </button>
+      </form>
+      <section id="todos"></section>
+    </main>
+  </body>
+</html>
