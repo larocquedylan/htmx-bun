@@ -41,7 +41,7 @@ async function handler(request: Request): Promise<Response> {
 
   // accept the get todo items from form
   if (url.pathname === "/todos" && request.method === "GET") {
-    return new Response(renderToString(<TodoList todos={[]} />));
+    return new Response(renderToString(<TodoList todos={todos} />));
   }
 
   return new Response("Not Found", { status: 404 });
