@@ -8,6 +8,7 @@ const server = Bun.serve({
 });
 
 type Todo = { id: number; text: string };
+// to do: create a database
 const todos: Todo[] = [];
 
 type TodoRequestBody = { todo: string };
