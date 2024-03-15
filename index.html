@@ -39,7 +39,11 @@
           Add
         </button>
       </form>
-      <section id="todos"></section>
+      <section
+        id="todos"
+        hx-get="/todos"
+        hx-trigger="load"
+        hx-swap="outerHTML"></section>
     </main>
   </body>
 </html>
