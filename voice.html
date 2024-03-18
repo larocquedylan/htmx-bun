@@ -12,15 +12,20 @@
     <div
       class="bg-gradient-to-br from-blue-500 via-blue-400 to-white min-h-screen flex items-center justify-center">
       <div class="w-[600px] mx-auto bg-white p-6 rounded-lg shadow">
-        <div class="mt-4 p-6 border-2 border-dashed rounded-lg border-blue-300 text-center">
+        <!-- <div class="mt-4 p-6 border-2 border-dashed rounded-lg border-blue-300 text-center">
           <DownloadIcon class="text-blue-500 h-8 w-8 mx-auto" />
           <p class="text-sm mt-2">Choose a file (max 2 min)</p>
           <p class="text-xs mt-1 text-gray-500">to start transcribing with Leopard</p>
-        </div>
-        <div class="mt-2 flex justify-between">
-          <button class="bg-blue-500 text-white rounded-lg p-2">Choose File</button>
-          <button class="bg-blue-500 text-white rounded-lg p-2">Record Audio</button>
-        </div>
+        </div> -->
+
+        <form
+          id="file-upload-form"
+          class="mt-2 flex"
+          hx-post="/upload"
+          hx-enc-type="multipart/form-data">
+          <input type="file" id="audioFile" name="audioFile" accept=".mp3, .m4a" required />
+          <button type="submit" class="bg-blue-500 text-white rounded-lg p-2">Upload</button>
+        </form>
         <div class="mt-4 p-4 bg-blue-100 rounded">
           <p class="text-sm font-semibold"></p>
           <p class="text-sm mt-2"></p>

@@ -1,5 +1,5 @@
 {
-  "include": [".eslintrc.cjs", "prettier.config.mjs"],
+  "include": [".eslintrc.cjs", "prettier.config.mjs", "src/types.d.ts"],
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "esnext",

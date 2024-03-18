@@ -4,6 +4,13 @@ import * as elements from "typed-html";
 import { v4 as uuidv4 } from "uuid";
 import React from "react";
 import swagger from "@elysiajs/swagger";
+import { Leopard } from "@picovoice/leopard-node";
+
+require("dotenv").config();
+
+if (typeof process.env.PICOVOICE_KEY === "undefined") {
+  throw new Error("PICOVOICE_KEY is not set in the environment variables.");
+}
 
 interface Todo {
   id: string;
@@ -11,7 +18,9 @@ interface Todo {
   completed: boolean;
 }
 
-const todos: Todo[] = [{ id: uuidv4(), text: "finish this tutorial", completed: false }];
+const todos: Todo[] = [
+  { id: uuidv4(), text: "finish this tutorial", completed: false },
+];
 
 const app = new Elysia()
   .use(html())
@@ -36,11 +45,28 @@ const app = new Elysia()
       todos.splice(todos.indexOf(todo), 1);
     }
   })
+  // PICOVOICE
+  .post("/upload", ({ body }) => {
+    console.log(body);
+    console.log("upload was successful");
+
+    try {
+      const tempFilePath = `./temp/${body.audioFile.name}`;
+      const leopard = new Leopard(process.env.PICOVOICE_KEY!);
+      const result = leopard.processFile(tempFilePath);
+      console.log(result);
+    } catch (error) {
+      console.log("error :", error);
+    }
+    return <div> hey</div>;
+  })
   .listen(3000);
 
 app.handle(new Request("http://localhost/")).then(console.log);
 
-console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
+console.log(
+  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+);
 
 export type App = typeof app;
 

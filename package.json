@@ -23,7 +23,9 @@
     "@elysiajs/eden": "^1.0.0",
     "@elysiajs/html": "^1.0.0",
     "@elysiajs/swagger": "^1.0.0",
+    "@picovoice/leopard-node": "^2.0.2",
     "@types/uuid": "^9.0.8",
+    "dotenv": "^16.4.5",
     "elysia": "^1.0.0",
     "htmx.org": "^1.9.10",
     "uuid": "^9.0.1"
