@@ -1,5 +1,7 @@
-import { htmx } from "htmx.org";
 import { renderToString } from "react-dom/server";
+
+const { stat } = require("fs").promises;
+const BASE_PATH = "./public";
 
 const server = Bun.serve({
   hostname: "localhost",
@@ -8,7 +10,7 @@ const server = Bun.serve({
 });
 
 type Todo = { id: number; text: string };
-// to do: create a database
+// TODO: create a database
 const todos: Todo[] = [];
 
 type TodoRequestBody = { todo: string };
@@ -16,7 +18,17 @@ type TodoRequestBody = { todo: string };
 console.log(`Listening on http://${server.hostname}:${server.port}`);
 console.log(`Press Ctrl+C to stop the server`);
 
+/**
+ *
+ *
+ * @param {Request} request
+ * @returns  {Promise<Response>}
+ * link to the server build {@link server}
+ * TODO: Make elsyia Server
+ *
+ */
 async function handler(request: Request): Promise<Response> {
+  // const filePath = BASE_PATH + new URL(request.url);
   const url = new URL(request.url);
 
   // to do: make elysia server

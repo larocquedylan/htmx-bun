@@ -1,15 +1,17 @@
-# htmx-bun
+# bun fun
 
-To install dependencies:
+Playing with HTMX and bun. Using Elysia as a server framework.
 
-```bash
-bun install
-```
+Got the basic to do list up and functioning. Going to now experiment with picovoice api.
 
-To run:
+## picovoice
 
-```bash
-bun run index.ts
-```
+The goal is to extend (probably gut existing work but we will see...) the application with the capability to upload audio files (specifically .m4a and .mp3 formats), send these files to the backend, process them using the Picovoice Leopard API for speech-to-text transcription, and display the transcription results.
 
-This project was created using `bun init` in bun v1.0.26. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+I chose picovoice because a few reasons:
+
+1. They are currently hiring and I wanted to be able to actually offer some value in my cover letter
+2. From my understand at this moment, I download the model, and so I can use it offline and in a private manner
+3. The privacy is big, because I like thinking out loud and writing always feels like I am contained in some manner. So I would like to use this app as a dictation tool.
+
+ok... lets do this
