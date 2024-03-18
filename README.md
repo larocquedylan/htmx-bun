@@ -15,3 +15,11 @@ I chose picovoice because a few reasons:
 3. The privacy is big, because I like thinking out loud and writing always feels like I am contained in some manner. So I would like to use this app as a dictation tool.
 
 ok... lets do this
+
+## update
+
+So... it seems like picovoice node api may not jive with bun.
+
+I was under the impression that Bun allowed just plug and play with the npm...
+
+Will have to look into this further. Bummer.
